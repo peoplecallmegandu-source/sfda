@@ -1,0 +1,129 @@
+<!--  -->
+<!--  -->
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:300,400,500,600,700&family=Merriweather:300,400,500,600,700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Contact Horizon Realty — request showings, seller consults, and partnership inquiries.">
+  <title>Contact — Horizon Realty</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { fontFamily: { sans:['Poppins','system-ui'], display: ['Merriweather'] } } } }
+  </script>
+
+  <style>
+    body{background:linear-gradient(180deg,#071021,#071830); color:#fff}
+    .glass{background:linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));backdrop-filter:blur(10px)}
+    main > .full {width:100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);}    
+  </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif;" class="min-h-screen text-slate-100" style="font-family: 'Poppins', sans-serif;">
+  <header class="fixed top-4 left-4 right-4 z-50">
+    <nav class="glass rounded-xl p-3 flex items-center justify-between">
+      <a href="#" onclick="window.parent.handlePreviewNavigation(\'index.html\'); return false;" class="flex items-center gap-3 no-underline">
+        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-500 to-violet-600 flex items-center justify-center shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2 4 4 8-8 4 4v6a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div class="leading-none text-white">
+          <div class="font-display text-lg">Horizon Realty</div>
+          <div class="text-xs text-sky-200 -mt-1">Get in touch</div>
+        </div>
+      </a>
+
+      <div class="flex items-center gap-4">
+        <a href="#" onclick="window.parent.handlePreviewNavigation(\'index.html\'); return false;" class="text-sm text-sky-100">Home</a>
+        <a href="#" onclick="window.parent.handlePreviewNavigation(\'about.html\'); return false;" class="text-sm text-sky-100">About</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="pt-28 w-full">
+    <section class="full px-6 md:px-12 py-12">
+      <div class="glass rounded-xl p-6 md:flex md:items-start md:gap-6">
+        <div class="md:flex-1">
+          <h1 class="font-display text-3xl">Connect with Horizon</h1>
+          <p class="mt-2 text-sky-200">For showings, seller consults, or general questions — reach out. Our team responds to all inquiries within 24 hours.</p>
+
+          <div class="mt-6 space-y-3 text-sm text-sky-200">
+            <div><strong>Office:</strong> 800 Horizon Ave</div>
+            <div><strong>Hours:</strong> Mon–Sat 9am — 6pm</div>
+            <div><strong>Phone:</strong> (555) 555-4664</div>
+          </div>
+        </div>
+
+        <div class="md:w-1/2 mt-6 md:mt-0">
+          <form id="contactForm" class="space-y-4" novalidate>
+            <div>
+              <label class="text-sm block mb-1">Full name</label>
+              <input type="text" id="name" class="w-full rounded-md p-3 bg-white/5 outline-none focus:ring-2 focus:ring-sky-400" required aria-required="true">
+              <p class="text-xs text-rose-400 hidden mt-1" id="err-name">Please enter your name.</p>
+            </div>
+            <div>
+              <label class="text-sm block mb-1">Email</label>
+              <input type="email" id="email" class="w-full rounded-md p-3 bg-white/5 outline-none focus:ring-2 focus:ring-sky-400" required aria-required="true">
+              <p class="text-xs text-rose-400 hidden mt-1" id="err-email">Please enter a valid email.</p>
+            </div>
+            <div>
+              <label class="text-sm block mb-1">Message</label>
+              <textarea id="message" rows="4" class="w-full rounded-md p-3 bg-white/5 outline-none focus:ring-2 focus:ring-sky-400" required aria-required="true"></textarea>
+              <p class="text-xs text-rose-400 hidden mt-1" id="err-message">Tell us about your inquiry.</p>
+            </div>
+            <div class="flex items-center gap-3">
+              <button type="submit" class="py-2 px-4 bg-gradient-to-r from-sky-400 to-violet-600 text-white rounded-full">Send Message</button>
+              <div id="formStatus" class="text-sm text-sky-200"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-6 md:px-12 pb-14">
+      <div class="glass rounded-xl p-6">
+        <h2 class="font-display text-2xl">Listing appointments & seller consults</h2>
+        <p class="mt-2 text-sky-200">Book a no-obligation consult — we’ll evaluate your property, discuss staging, and recommend a pricing strategy to maximize sale value.</p>
+        <div class="mt-4"><a href="#" id="bookConsult" class="py-2 px-4 bg-white/6 rounded-full">Request a Consult</a></div>
+      </div>
+    </section>
+
+    <footer class="py-8 px-6 md:px-12">
+      <div class="glass rounded-xl p-6 text-center">
+        <div class="font-display text-lg">Ready to take the next step?</div>
+        <div class="mt-3"><a href="#" onclick="window.parent.handlePreviewNavigation(\'index.html\'); return false;" class="py-2 px-4 bg-gradient-to-r from-sky-400 to-violet-600 text-white rounded-full">Back to home</a></div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const nameEl = document.getElementById('name');
+    const emailEl = document.getElementById('email');
+    const msgEl = document.getElementById('message');
+    const status = document.getElementById('formStatus');
+
+    function validateEmail(e){ return /\S+@\S+\.\S+/.test(e); }
+
+    form.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      let valid = true;
+      if (!nameEl.value.trim()){ document.getElementById('err-name').classList.remove('hidden'); valid=false; } else document.getElementById('err-name').classList.add('hidden');
+      if (!validateEmail(emailEl.value)) { document.getElementById('err-email').classList.remove('hidden'); valid=false; } else document.getElementById('err-email').classList.add('hidden');
+      if (!msgEl.value.trim()) { document.getElementById('err-message').classList.remove('hidden'); valid=false; } else document.getElementById('err-message').classList.add('hidden');
+      if (!valid) return;
+
+      status.textContent = 'Sending…';
+      setTimeout(()=>{ status.textContent = 'Thanks! We will reply in 24 hours.'; form.reset(); }, 900);
+    });
+
+    // Book consult button opens mailto for quick flow (progressive enhancement)
+    document.getElementById('bookConsult')?.addEventListener('click', (e)=>{ e.preventDefault(); window.location.href = 'mailto:sales@horizonrealty.example?subject=Seller%20Consult%20Request'; });
+  </script>
+</body>
+</html>
