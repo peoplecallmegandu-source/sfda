@@ -1,0 +1,501 @@
+<!--  -->
+<!--  -->
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:300,400,500,600,700&family=Merriweather:300,400,500,600,700&display=swap" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Horizon Realty — find homes that move you. Luxury listings, streamlined buying, expert guidance.">
+  <meta property="og:title" content="Horizon Realty — Home starts here">
+  <meta property="og:description" content="Discover curated properties, exceptional service, and a home buying experience designed around you.">
+  <title>Horizon Realty — Find Your Next Home</title>
+
+  <!-- Google Fonts comments for pipeline -->
+  <!--  -->
+  <!--  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { sans: ['Poppins', 'system-ui', 'sans-serif'], display: ['Merriweather'] } } }
+    }
+  </script>
+
+  <style>
+    :root{
+      --bg: #071021;
+      --card: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.06);
+      --muted: #94a3b8;
+    }
+    .light{ --bg: #f7fbff; --card: rgba(2,6,23,0.04); --glass: rgba(255,255,255,0.7); --muted:#334155 }
+
+    html { background: var(--bg); transition: background .4s ease, color .3s ease }
+    body { background: linear-gradient(180deg, rgba(7,16,33,0.9), rgba(11,23,43,0.95)); }
+
+    .glass { background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(10px) saturate(120%); }
+
+    .reveal{ opacity:0; transform: translateY(20px); transition: all .7s cubic-bezier(.2,.9,.2,1); }
+    .reveal.visible{ opacity:1; transform:none; }
+
+    /* full-bleed wrappers */
+    main > .full { width:100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw); }
+
+    /* micro-interactions */
+    .card-hover:hover{ transform: translateY(-8px) scale(1.01); box-shadow: 0 12px 30px rgba(2,6,23,0.5); }
+  </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif;" class="min-h-screen text-slate-100" id="page" style="font-family: 'Poppins', sans-serif;">
+  <!-- Header -->
+  <header class="fixed top-4 left-4 right-4 z-50 pointer-events-auto">
+    <nav class="w-full max-w-none flex items-center justify-between glass rounded-xl px-4 py-3 shadow-lg backdrop-blur-md">
+      <a href="#" onclick="window.parent.handlePreviewNavigation(\'index.html\'); return false;" class="flex items-center gap-3 no-underline">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-500 to-violet-600 flex items-center justify-center shadow-md transform hover:scale-105 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2 4 4 8-8 4 4v6a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </div>
+        <div class="leading-none text-white">
+          <div class="font-display text-xl">Horizon Realty</div>
+          <div class="text-xs text-sky-200 -mt-1">Find homes that move you</div>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center gap-4">
+        <a class="text-sm text-sky-100 hover:text-white transition" href="#" onclick="window.parent.handlePreviewNavigation(\'about.html\'); return false;">About</a>
+        <a class="text-sm text-sky-100 hover:text-white transition" href="#" onclick="window.parent.handlePreviewNavigation(\'contact.html\'); return false;">Contact</a>
+        <a class="text-sm text-sky-100 hover:text-white transition" href="#listings">Listings</a>
+        <a class="text-sm text-sky-100 hover:text-white transition" href="#featured">Featured</a>
+        <button id="themeToggle" aria-label="Toggle dark and light" class="ml-2 p-2 rounded-md hover:scale-105 transition bg-white/5">
+          <svg id="themeIcon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-300" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a.75.75 0 01.75.75V4a.75.75 0 01-1.5 0V2.75A.75.75 0 0110 2zM10 16a.75.75 0 01.75.75V18a.75.75 0 01-1.5 0v-1.25A.75.75 0 0110 16zM4.222 4.222a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.834 14.834a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM2 10a.75.75 0 01.75-.75H4a.75.75 0 010 1.5H2.75A.75.75 0 012 10zM16 10a.75.75 0 01.75-.75H18a.75.75 0 010 1.5h-1.25A.75.75 0 0116 10zM4.222 15.778a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.834 5.166a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM10 6.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="md:hidden">
+        <button id="mobileMenuBtn" aria-label="Open menu" class="p-2 rounded-md bg-white/5">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="mt-3 hidden glass rounded-xl p-4 shadow-md">
+      <a class="block py-2" href="#" onclick="window.parent.handlePreviewNavigation(\'about.html\'); return false;">About</a>
+      <a class="block py-2" href="#" onclick="window.parent.handlePreviewNavigation(\'contact.html\'); return false;">Contact</a>
+      <a class="block py-2" href="#listings">Listings</a>
+      <a class="block py-2" href="#featured">Featured</a>
+    </div>
+  </header>
+
+  <main class="pt-28 w-full">
+    <!-- Hero -->
+    <section class="full relative overflow-hidden">
+      <div class="relative w-full h-[72vh] flex items-center justify-center">
+        <div class="absolute inset-0 parallax-1" style="background:linear-gradient(180deg, rgba(2,6,23,0.6), rgba(2,6,23,0.85)); mix-blend:multiply"></div>
+        <div class="absolute inset-0">
+          <img src="https://images.pexels.com/photos/14769891/pexels-photo-14769891.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Modern home aerial" class="w-full h-full object-cover opacity-90" loading="lazy">
+        </div>
+
+        <div class="relative z-20 w-full px-6 md:px-12">
+          <div class="mx-auto w-full text-center">
+            <h1 class="reveal visible font-display text-4xl md:text-6xl text-white drop-shadow-lg leading-tight">Find a place to call home — effortlessly</h1>
+            <p class="reveal visible mt-4 text-sky-100 text-lg md:text-xl max-w-3xl mx-auto">Horizon Realty pairs curated listings with dedicated local experts — we guide you from search to keys. Move smarter, live better.</p>
+
+            <div class="mt-8 flex items-center justify-center gap-4">
+              <a href="#listings" class="inline-flex items-center gap-3 bg-gradient-to-r from-sky-400 to-violet-600 text-white py-3 px-5 rounded-full shadow-lg transform hover:scale-105 transition" role="button">Explore Listings</a>
+              <button id="tourBtn" class="py-3 px-5 rounded-full bg-white/6 text-white hover:bg-white/10 transition">Schedule a Tour</button>
+            </div>
+
+            <div class="mt-10 flex items-center justify-center gap-6 text-sm text-sky-200">
+              <div class="flex items-center gap-2"><strong class="text-white">Trusted</strong><span>— 800+ families helped</span></div>
+              <div class="h-6 w-px bg-white/10"></div>
+              <div class="flex items-center gap-2">Local Experts • Transparent Fees</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Search & Highlights -->
+    <section class="py-12 px-6 md:px-12">
+      <div class="glass rounded-xl p-6">
+        <div class="flex flex-col md:flex-row items-center gap-4">
+          <div class="flex-1 w-full">
+            <label class="text-sm text-sky-100">Search homes</label>
+            <div class="flex gap-2 mt-3">
+              <input id="searchInput" type="text" placeholder="City, neighborhood, or MLS #" class="w-full rounded-l-md p-3 bg-white/5 outline-none focus:ring-2 focus:ring-sky-400" />
+              <select id="type" class="rounded-r-md p-3 bg-white/5 outline-none">
+                <option value="any">Any</option>
+                <option value="sale">For Sale</option>
+                <option value="rent">For Rent</option>
+              </select>
+              <button id="searchBtn" class="py-3 px-5 bg-gradient-to-r from-yellow-400 to-pink-500 rounded-md text-black">Search</button>
+            </div>
+            <p class="mt-2 text-sm text-sky-200">Pro tips: try "waterfront", "downtown loft", or paste an MLS number for instant match.</p>
+          </div>
+
+          <div class="w-full md:w-1/3 text-center">
+            <div class="text-sm text-sky-200">Pre-approval progress</div>
+            <div class="mt-2 bg-white/6 rounded-full h-4 w-full overflow-hidden">
+              <div id="approvalBar" class="h-4 bg-gradient-to-r from-yellow-400 to-pink-500" style="width: 45%; transition: width .8s ease"></div>
+            </div>
+            <div class="mt-2 text-sm text-sky-100">45% — On track to get your pre-approval</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Carousel -->
+    <section id="featured" class="py-12 px-6 md:px-12">
+      <h2 class="text-2xl md:text-3xl font-display">Featured properties</h2>
+      <p class="mt-2 text-sky-200">Hand-picked showcase homes — move-in ready and market-ready.</p>
+
+      <div class="mt-6 relative">
+        <div id="carousel" class="w-full overflow-hidden rounded-xl shadow-lg">
+          <div class="flex transition-transform duration-700" id="carouselInner" style="transform:translateX(0%)">
+            <div class="w-full flex-shrink-0">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="glass p-4 rounded-xl card-hover reveal" tabindex="0">
+                  <img src="https://pixabay.com/get/gf4430fcc5080293d659cf16c8cfc448085733a01013f65f876bd183772a555d6589df0cf6d6874e1c1e217ae8ca25586a7183c428a00aa32aa2303016bb54f33_640.jpg" alt="Family home" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Maplewood Family Home</h3>
+                    <p class="text-sm text-sky-200">4 bed • 3 bath • 2,800 sqft — $899,000</p>
+                    <div class="mt-3 flex items-center gap-2">
+                      <button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white" data-id="prop-1">View</button>
+                      <button class="py-2 px-3 bg-white/6 rounded-md text-white add-fav" data-id="prop-1">Save</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="glass p-4 rounded-xl card-hover reveal" tabindex="0">
+                  <img src="https://pixabay.com/get/g417ca147d915e2123c550c04f663235d1c64f0491a68d28bf09084ec9742c8b5be0a3fcbe2a0bfce1cc2da1d39189b29af6964687f2a4dfe3cd2292b8f23e97a_640.jpg" alt="Downtown loft" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Riverside Loft</h3>
+                    <p class="text-sm text-sky-200">2 bed • 2 bath • 1,400 sqft — $620,000</p>
+                    <div class="mt-3 flex items-center gap-2">
+                      <button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white" data-id="prop-2">View</button>
+                      <button class="py-2 px-3 bg-white/6 rounded-md text-white add-fav" data-id="prop-2">Save</button>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="glass p-4 rounded-xl card-hover reveal" tabindex="0">
+                  <img src="https://images.unsplash.com/photo-1746170005204-e7e18cddeffe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjB0b3duaG91c2UlMjBleHRlcmlvciUyMHdpdGglMjBjbGVhbiUyMGxpbmVzJTIwYW5kJTIwcHJpdmF0ZSUyMHBhdGlvfGVufDB8MHx8fDE3NTUzNTYzNTR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Townhouse" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Elm Street Townhouse</h3>
+                    <p class="text-sm text-sky-200">3 bed • 2.5 bath • 1,900 sqft — $749,000</p>
+                    <div class="mt-3 flex items-center gap-2">
+                      <button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white" data-id="prop-3">View</button>
+                      <button class="py-2 px-3 bg-white/6 rounded-md text-white add-fav" data-id="prop-3">Save</button>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </div>
+
+            <!-- Repeat slide with different three properties to allow carousel movement -->
+            <div class="w-full flex-shrink-0">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <article class="glass p-4 rounded-xl card-hover reveal">
+                  <img src="https://images.pexels.com/photos/33390757/pexels-photo-33390757.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Waterfront" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Lakeside Retreat</h3>
+                    <p class="text-sm text-sky-200">3 bed • 2 bath • 2,200 sqft — $1,150,000</p>
+                    <div class="mt-3"><button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white">View</button></div>
+                  </div>
+                </article>
+
+                <article class="glass p-4 rounded-xl card-hover reveal">
+                  <img src="https://images.pexels.com/photos/14656472/pexels-photo-14656472.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Bungalow" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Oakwood Bungalow</h3>
+                    <p class="text-sm text-sky-200">2 bed • 1 bath • 1,100 sqft — $420,000</p>
+                    <div class="mt-3"><button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white">View</button></div>
+                  </div>
+                </article>
+
+                <article class="glass p-4 rounded-xl card-hover reveal">
+                  <img src="https://images.unsplash.com/photo-1548386704-23fc0135faab?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw4fHxsdXh1cnklMjBjb25kbyUyMHJvb2Z0b3AlMjBwb29sJTIwYW5kJTIwc2t5bGluZSUyMGF0JTIwZHVza3xlbnwwfDB8fHwxNzU1MzU2MzU4fDA&ixlib=rb-4.1.0&q=80&w=1080" alt="Condo" class="w-full h-48 object-cover rounded-lg shadow-md" loading="lazy">
+                  <div class="mt-3">
+                    <h3 class="font-semibold text-lg">Skyline Condo</h3>
+                    <p class="text-sm text-sky-200">1 bed • 1 bath • 800 sqft — $385,000</p>
+                    <div class="mt-3"><button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white">View</button></div>
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3 flex items-center justify-between">
+          <div class="flex gap-2">
+            <button id="prev" class="p-2 bg-white/6 rounded-md">Prev</button>
+            <button id="next" class="p-2 bg-white/6 rounded-md">Next</button>
+          </div>
+          <div class="text-sm text-sky-200">Swipe or use arrows • Lazy loaded images</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Listings (search results) -->
+    <section id="listings" class="py-12 px-6 md:px-12">
+      <h2 class="text-2xl md:text-3xl font-display">Latest listings</h2>
+      <p class="mt-2 text-sky-200">Browse the latest homes on the market. Use the search above to filter in real-time.</p>
+
+      <div id="results" class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Property cards will be rendered by JS for interactivity & filtering -->
+      </div>
+    </section>
+
+    <!-- Testimonials & Trust -->
+    <section class="py-12 px-6 md:px-12">
+      <h2 class="text-2xl md:text-3xl font-display">Why clients choose us</h2>
+      <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass p-6 rounded-xl">
+          <p class="text-sky-100">"Horizon found us the perfect home — fast, with zero stress. Their team handled negotiations with skill and heart."</p>
+          <footer class="mt-4 text-sm text-sky-200">— Ana G., homeowner</footer>
+        </div>
+        <div class="glass p-6 rounded-xl">
+          <p class="text-sky-100">"Transparent fees and proactive communication. We felt guided every step of the way."</p>
+          <footer class="mt-4 text-sm text-sky-200">— Marc L., buyer</footer>
+        </div>
+        <div class="glass p-6 rounded-xl">
+          <p class="text-sky-100">"Their local market knowledge got our property sold above list price in 3 days."</p>
+          <footer class="mt-4 text-sm text-sky-200">— Elena & Co., sellers</footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Accordion -->
+    <section class="py-12 px-6 md:px-12">
+      <h2 class="text-2xl md:text-3xl font-display">Common questions</h2>
+      <div class="mt-6 space-y-4">
+        <div class="glass p-4 rounded-lg">
+          <button class="w-full flex justify-between items-center" data-qa="accordion-btn">
+            <span>How do I start buying a home?</span>
+            <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M6 8l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="hidden mt-3 text-sky-100">Begin with a quick chat — we’ll assess needs, budget, and timelines. We can connect you with lenders and set up a custom search.</div>
+        </div>
+
+        <div class="glass p-4 rounded-lg">
+          <button class="w-full flex justify-between items-center" data-qa="accordion-btn">
+            <span>Do you help sellers prepare their property?</span>
+            <svg class="h-5 w-5 transition-transform" viewBox="0 0 20 20" fill="none" stroke="currentColor"><path d="M6 8l4 4 4-4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="hidden mt-3 text-sky-100">Yes — staging, professional photos, pricing strategy, and targeted marketing are included in our seller services.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="py-10 px-6 md:px-12">
+      <div class="glass rounded-xl p-6 text-center">
+        <h3 class="font-display text-2xl">Ready to move? Book a private tour this week</h3>
+        <p class="mt-2 text-sky-200">Slots fill quickly — reserve a time and get first access to new listings.</p>
+        <div class="mt-4">
+          <button id="bookNow" class="inline-block bg-gradient-to-r from-yellow-400 to-pink-500 text-black py-3 px-6 rounded-full font-semibold">Book a Tour</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 md:px-12 w-full">
+      <div class="glass rounded-xl p-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+          <div class="font-display text-lg">Horizon Realty</div>
+          <div class="text-sm text-sky-200">Local experience, global perspective • (555) 555-Home</div>
+        </div>
+        <div class="flex gap-4 items-center">
+          <a href="#" class="text-sm text-sky-200">Instagram</a>
+          <a href="#" class="text-sm text-sky-200">LinkedIn</a>
+          <a href="#" onclick="window.parent.handlePreviewNavigation(\'contact.html\'); return false;" class="text-sm text-sky-200">Contact</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Schedule / Tour Modal -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50" role="dialog" aria-modal="true">
+    <div class="absolute inset-0 bg-black/50" data-close></div>
+    <div class="glass rounded-xl p-6 z-60 w-11/12 md:w-2/3 max-w-none">
+      <div class="flex justify-between items-start">
+        <h3 class="text-2xl font-display">Schedule a Private Tour</h3>
+        <button data-close aria-label="Close modal">✕</button>
+      </div>
+      <form id="tourForm" class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4" novalidate>
+        <input type="text" id="tname" placeholder="Full name" class="p-3 rounded-md bg-white/5" required>
+        <input type="email" id="temail" placeholder="Email" class="p-3 rounded-md bg-white/5" required>
+        <input type="tel" id="tphone" placeholder="Phone" class="p-3 rounded-md bg-white/5">
+        <input type="date" id="tdate" class="p-3 rounded-md bg-white/5" required>
+        <textarea id="tnotes" placeholder="Which property? Any notes…" class="p-3 rounded-md bg-white/5 md:col-span-2"></textarea>
+        <div class="md:col-span-2 flex items-center gap-3">
+          <button type="submit" class="py-2 px-4 bg-gradient-to-r from-sky-400 to-violet-600 text-white rounded-md">Request Tour</button>
+          <button data-close type="button" class="py-2 px-4 bg-white/6 rounded-md">Cancel</button>
+          <div id="tourStatus" class="text-sm text-sky-200"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // DOM helpers
+    const $ = (s, c=document) => c.querySelector(s);
+    const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
+
+    // Mobile menu toggle
+    $('#mobileMenuBtn')?.addEventListener('click', () => $('#mobileMenu').classList.toggle('hidden'));
+
+    // Theme toggle with localStorage
+    const themeBtn = $('#themeToggle');
+    const themeIcon = $('#themeIcon');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') document.documentElement.classList.add('light');
+    function updateThemeIcon(){
+      if (document.documentElement.classList.contains('light')){
+        themeIcon.innerHTML = '<path d="M10 3.22a.75.75 0 01.75.75V5a.75.75 0 01-1.5 0V3.97A.75.75 0 0110 3.22zM10 16.78a.75.75 0 01.75.75V18a.75.75 0 01-1.5 0v-0.47a.75.75 0 01.75-.75zM4.22 4.22a.75.75 0 011.06 0l.883.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.83 14.83a.75.75 0 011.06 0l.883.884a.75.75 0 11-1.06 1.06l-.883-.884a.75.75 0 010-1.06zM2 10a.75.75 0 01.75-.75H4a.75.75 0 010 1.5H2.75A.75.75 0 012 10zM16 10a.75.75 0 01.75-.75H18a.75.75 0 010 1.5h-1.25A.75.75 0 0116 10zM4.22 15.78a.75.75 0 011.06 0l.883.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.83 5.17a.75.75 0 011.06 0l.883.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM10 6.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />'
+      } else {
+        themeIcon.innerHTML = '<path d="M10 2a.75.75 0 01.75.75V4a.75.75 0 01-1.5 0V2.75A.75.75 0 0110 2zM10 16a.75.75 0 01.75.75V18a.75.75 0 01-1.5 0v-1.25A.75.75 0 0110 16zM4.222 4.222a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.834 14.834a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM2 10a.75.75 0 01.75-.75H4a.75.75 0 010 1.5H2.75A.75.75 0 012 10zM16 10a.75.75 0 01.75-.75H18a.75.75 0 010 1.5h-1.25A.75.75 0 0116 10zM4.222 15.778a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.834 5.166a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM10 6.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z" />'
+      }
+    }
+    themeBtn?.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+      updateThemeIcon();
+    });
+    updateThemeIcon();
+
+    // Scroll reveal
+    const revealEls = $$('.reveal');
+    const io = new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) en.target.classList.add('visible'); }), { threshold: 0.12 });
+    revealEls.forEach(e => io.observe(e));
+
+    // Carousel
+    const carouselInner = $('#carouselInner');
+    const slides = carouselInner ? carouselInner.children.length : 0;
+    let index = 0;
+    $('#next')?.addEventListener('click', () => showSlide(index + 1));
+    $('#prev')?.addEventListener('click', () => showSlide(index - 1));
+    function showSlide(i){ if (!carouselInner) return; index = (i + slides) % slides; carouselInner.style.transform = `translateX(-${index * 100}%)`; }
+    setInterval(() => showSlide(index + 1), 7000);
+
+    // Modal logic
+    const modal = $('#modal');
+    const tourBtn = $('#tourBtn');
+    const bookNow = $('#bookNow');
+    const closeBtns = $$('#modal [data-close]');
+    [tourBtn, bookNow, $('#bookNow'), $('#tourBtn')].forEach(b => { if (b) b.addEventListener('click', () => modal.classList.remove('hidden')); });
+    closeBtns.forEach(b => b.addEventListener('click', () => modal.classList.add('hidden')));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') modal.classList.add('hidden'); });
+
+    // Tour form
+    $('#tourForm')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = $('#tname').value.trim();
+      const email = $('#temail').value.trim();
+      const date = $('#tdate').value;
+      if (!name || !email || !date){ $('#tourStatus').textContent = 'Please complete required fields.'; return; }
+      $('#tourStatus').textContent = 'Requesting…';
+      setTimeout(() => { $('#tourStatus').textContent = 'Request received — our agent will contact you within 24 hours.'; $('#tourForm').reset(); }, 1000);
+    });
+
+    // Accordion
+    $$('[data-qa="accordion-btn"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const open = !content.classList.contains('open');
+        $$('[data-qa="accordion-btn"]').forEach(b => b.nextElementSibling.classList.remove('open'));
+        if (open) content.classList.add('open');
+      });
+    });
+
+    // Simple property data & dynamic rendering for search
+    const properties = [
+      { id: 'prop-1', title: 'Maplewood Family Home', type: 'sale', beds:4, baths:3, sqft:2800, price:899000, img:'https://images.pexels.com/photos/5997993/pexels-photo-5997993.jpeg?auto=compress&cs=tinysrgb&h=650&w=940' },
+      { id: 'prop-2', title: 'Riverside Loft', type: 'sale', beds:2, baths:2, sqft:1400, price:620000, img:'https://pixabay.com/get/g61a962efe4f07d9c65323879cb8fdec5469c74ebafd28dbe9ee3702d399d051ee111ffc979b92a8f125eca1d041b59a63392c7c6d779fe1ea1399b6e6a5c17d9_640.jpg' },
+      { id: 'prop-3', title: 'Elm Street Townhouse', type: 'sale', beds:3, baths:2.5, sqft:1900, price:749000, img:'https://images.unsplash.com/photo-1727303277046-277cfd902a73?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwyfHxtb2Rlcm4lMjB0b3duaG91c2UlMjBleHRlcmlvciUyMHdpdGglMjBjbGVhbiUyMGxpbmVzJTIwYW5kJTIwcHJpdmF0ZSUyMHBhdGlvfGVufDB8MHx8fDE3NTUzNTYzNTR8MA&ixlib=rb-4.1.0&q=80&w=1080' },
+      { id: 'prop-4', title: 'Oakwood Bungalow', type: 'sale', beds:2, baths:1, sqft:1100, price:420000, img:'https://images.unsplash.com/photo-1729409152199-bfc8f103305d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw2fHxzdWJ1cmJhbiUyMGJ1bmdhbG93JTIwd2l0aCUyMGJyaWdodCUyMGdhcmRlbiUyMGFuZCUyMGNvenklMjBwb3JjaHxlbnwwfDB8fHwxNzU1MzU2MzYwfDA&ixlib=rb-4.1.0&q=80&w=1080' },
+      { id: 'prop-5', title: 'Skyline Condo', type: 'sale', beds:1, baths:1, sqft:800, price:385000, img:'https://images.pexels.com/photos/3285725/pexels-photo-3285725.jpeg?auto=compress&cs=tinysrgb&h=650&w=940' }
+    ];
+
+    function formatPrice(n){ return '$' + n.toLocaleString(); }
+
+    function renderResults(list){
+      const container = $('#results');
+      container.innerHTML = '';
+      if (!list.length){ container.innerHTML = '<div class="glass p-6 rounded-xl">No results — try a broader search.</div>'; return; }
+      list.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'glass p-4 rounded-xl card-hover';
+        card.innerHTML = `
+          <img src="${p.img}" alt="${p.title}" class="w-full h-44 object-cover rounded-md shadow-md" loading="lazy">
+          <div class="mt-3">
+            <h3 class="font-semibold text-lg">${p.title}</h3>
+            <p class="text-sm text-sky-200">${p.beds} bed • ${p.baths} bath • ${p.sqft} sqft</p>
+            <div class="mt-2 flex items-center justify-between">
+              <div class="text-lg font-semibold">${formatPrice(p.price)}</div>
+              <div class="flex gap-2">
+                <button class="py-2 px-3 bg-gradient-to-r from-sky-400 to-violet-600 rounded-md text-white view-quick" data-id="${p.id}">View</button>
+                <button class="py-2 px-3 bg-white/6 rounded-md text-white add-fav" data-id="${p.id}">Save</button>
+              </div>
+            </div>
+          </div>`;
+        container.appendChild(card);
+      });
+    }
+
+    // initial render
+    renderResults(properties);
+
+    // Search
+    $('#searchBtn')?.addEventListener('click', () => performSearch());
+    $('#searchInput')?.addEventListener('keydown', (e) => { if (e.key === 'Enter') performSearch(); });
+
+    function performSearch(){
+      const q = $('#searchInput').value.trim().toLowerCase();
+      const type = $('#type').value;
+      const results = properties.filter(p => {
+        const matchesQ = !q || p.title.toLowerCase().includes(q) || p.img.toLowerCase().includes(q);
+        const matchesType = type === 'any' || p.type === type;
+        return matchesQ && matchesType;
+      });
+      renderResults(results);
+    }
+
+    // Favorites (localStorage)
+    function loadFavs(){ return JSON.parse(localStorage.getItem('horizon-favs') || '[]'); }
+    function saveFavs(arr){ localStorage.setItem('horizon-favs', JSON.stringify(arr)); }
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('add-fav')){
+        const id = e.target.dataset.id;
+        let favs = loadFavs();
+        if (!favs.includes(id)) favs.push(id);
+        else favs = favs.filter(x => x !== id);
+        saveFavs(favs);
+        e.target.textContent = favs.includes(id) ? 'Saved' : 'Save';
+        e.target.classList.toggle('bg-white/6');
+      }
+      if (e.target.classList.contains('view-quick') || e.target.dataset.id){
+        const id = e.target.dataset.id;
+        const p = properties.find(x => x.id === id);
+        if (p){
+          alert(`${p.title}\n${p.beds} bed • ${p.baths} bath • ${p.sqft} sqft\n${formatPrice(p.price)}`);
+        }
+      }
+    });
+
+    // small interaction: approval bar complete when clicking
+    $('#approvalBar')?.addEventListener('click', () => { $('#approvalBar').style.width = '100%'; alert('You are pre-approved — connect with our lender partner to finalize.'); });
+
+    // Accessibility: trap focus in modal (basic)
+    document.addEventListener('focus', function(e){ if (!modal.classList.contains('hidden') && !modal.contains(e.target)) modal.querySelector('input,button,textarea')?.focus(); }, true);
+  </script>
+</body>
+</html>
